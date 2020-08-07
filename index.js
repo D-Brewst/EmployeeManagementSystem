@@ -170,7 +170,7 @@ connection.connect(function(err) {
             },
             {
                 type: "list",
-                message: "Who is your employee's manager?",
+                message: "What is your employee's manager's ID?",
                 name: "manager",
                 choices: [2,3] 
             }
@@ -216,7 +216,7 @@ async function addNewRole(){
         },
         function (err) {
           if (err) throw err;
-          console.log("New department was added successfully!");
+          console.log("New role was added successfully!");
           // re-prompt the user for if they want to bid or post
           start();
         }
@@ -240,9 +240,7 @@ async function updateRole() {
             type: "list",
             message: "What is this employee's new role?",
             name: "newrole",
-            choices: () => {
-                return employee.map((employee) => employee.role_id);
-            }
+            choices: [1,2,3,4,5,6,7]
           }
         ]);
     connection.query(
@@ -257,9 +255,8 @@ async function updateRole() {
       ],
       function (err, res) {
         if (err) throw err;
-        console.log(res.affectedRows + " products updated!\n");
+        console.log("Role was updated successfully");
         // Call deleteProduct AFTER the UPDATE completes
-        console.table(employee);
         start();
       }
     );
@@ -285,7 +282,7 @@ function printEmployees(){
 }
 
 function printRoles(){
-    connection.query("SELECT title FROM role", function (err, res) {
+    connection.query("SELECT title AS Roles FROM role", function (err, res) {
         if (err) throw err;
         // Log all results of the SELECT statement
         console.table(res);
@@ -299,7 +296,7 @@ function employeesByManager(){
         const { managerID } = await inquirer.prompt([
           {
             type: "list",
-            message: "Choose an manager:",
+            message: "Choose a manager ID:",
             name: "managerID",
             choices: [2,3]
           }
@@ -355,7 +352,7 @@ async function rmRole(){
      function (err, res) {
         if (err) throw err;
         // Log all results of the SELECT statement
-        console.table(role);
+        console.log("Role was removed.");
         start();
       });
     })
@@ -380,7 +377,7 @@ function rmEmployee(){
      function (err, res) {
         if (err) throw err;
         // Log all results of the SELECT statement
-        console.table(res);
+        console.log("Employee was removed");
         start();
       });
     })

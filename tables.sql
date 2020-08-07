@@ -4,6 +4,7 @@ CREATE DATABASE employee_trackerDB;
 
 USE employee_trackerDB;
 DROP TABLE employee;
+DROP TABLE role;
 CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(30),
@@ -29,6 +30,8 @@ CREATE TABLE employee (
   FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
+TRUNCATE TABLE role;
+
 INSERT INTO department (name)
 VALUES ("Engineering"), ("Legal"), ("Finance"), ("Marketing"), ("HR"), ("Executive"), ("Security");
 
@@ -38,4 +41,4 @@ VALUES ("Lawyer", 100000.00, 2), ("Software engineer", 150000.00, 1), ("CEO", 20
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Bob", "Bill", 3, 3), ("Shanique", "Washington", 2, 3), ("Jennifer", "Walton", 1, 3), ("Jason", "Borne", 4, 3), ("John", "Wick", 5, 2), ("Thomas", "Chen", 6, 3), ("Trevor", "Lewis", 7, 3);
 
-SELECT * FROM employee
+SELECT employee.first_name, employee.last_name, role.title, role.salary, FROM employee INNER JOIN role ON employee.role_id = role.id
