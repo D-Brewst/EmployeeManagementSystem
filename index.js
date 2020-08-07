@@ -172,9 +172,7 @@ connection.connect(function(err) {
                 type: "list",
                 message: "Who is your employee's manager?",
                 name: "manager",
-                choices: () => {
-                    return employee.map((employee) => employee.manager_id);
-                  } 
+                choices: [2,3] 
             }
         ]);
         connection.query("INSERT INTO employee SET ?",
@@ -303,11 +301,9 @@ function employeesByManager(){
             type: "list",
             message: "Choose an manager:",
             name: "managerID",
-            choices: () => {
-              return employee.map((manager) => manager.manager_id);
-            },
-          },
-        ]);
+            choices: [2,3]
+          }
+          ]);
     connection.query(`SELECT first_name, last_name FROM employee WHERE manager_id=${managerID}`, function (err, res) {
         if (err) throw err;
         // Log all results of the SELECT statement
