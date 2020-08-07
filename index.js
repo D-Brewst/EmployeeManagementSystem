@@ -63,15 +63,6 @@ const removeRole = [
     }
 ]
 
-const quit = [
-    {
-        type: "list",
-        message: "Are your sure you would like to quit?",
-        name: "quit",
-        choices: ["Yes", "No"]
-    }
-]
-
 const removeEmployee = [
     {
         type: "list",
